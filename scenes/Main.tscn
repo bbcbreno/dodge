@@ -14,8 +14,13 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -0.0409031, 0.0078702, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 720, 1280, 0, 0, 0, 0, 0, 1280, 0, 0, 0, 0, -0.0409031, 0.0078702 )
 }
 
-[node name="Main" type="Node"]
+[node name="Main" type="CanvasLayer" index="0"]
 
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 script = ExtResource( 1 )
 Mob = ExtResource( 2 )
 
@@ -40,7 +45,7 @@ color = Color( 0.492188, 0.310925, 0.310925, 1 )
 [node name="MobTimer" type="Timer" parent="." index="2"]
 
 process_mode = 1
-wait_time = 1.4
+wait_time = 0.2
 one_shot = false
 autostart = false
 
@@ -114,7 +119,5 @@ autostart = true
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
 
 [connection signal="start_game" from="HUD" to="." method="new_game"]
-
-[connection signal="timeout" from="DifficultTimer" to="." method="_on_DifficultTimer_timeout"]
 
 
