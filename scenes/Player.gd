@@ -12,7 +12,6 @@ func _ready():
 
 func _process(delta):
 	velocity = Vector2()
-	log (InputEventScreenTouch.index)
 	if Input.is_action_pressed("ui_right"):
 		velocity.x += 1
 	if Input.is_action_pressed("ui_left"):

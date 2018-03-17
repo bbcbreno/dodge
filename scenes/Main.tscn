@@ -40,7 +40,7 @@ color = Color( 0.492188, 0.310925, 0.310925, 1 )
 [node name="MobTimer" type="Timer" parent="." index="2"]
 
 process_mode = 1
-wait_time = 0.5
+wait_time = 1.4
 one_shot = false
 autostart = false
 
@@ -98,6 +98,13 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 
+[node name="DifficultTimer" type="Timer" parent="." index="10"]
+
+process_mode = 1
+wait_time = 20.0
+one_shot = false
+autostart = true
+
 [connection signal="hit" from="Player" to="." method="game_over"]
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
@@ -107,5 +114,7 @@ bus = "Master"
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
 
 [connection signal="start_game" from="HUD" to="." method="new_game"]
+
+[connection signal="timeout" from="DifficultTimer" to="." method="_on_DifficultTimer_timeout"]
 
 

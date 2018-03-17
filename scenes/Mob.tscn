@@ -1,25 +1,26 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/Mob.gd" type="Script" id=1]
-[ext_resource path="res://art/enemySwimming_1.png" type="Texture" id=2]
-[ext_resource path="res://art/enemySwimming_2.png" type="Texture" id=3]
-[ext_resource path="res://art/enemyWalking_1.png" type="Texture" id=4]
-[ext_resource path="res://art/enemyWalking_2.png" type="Texture" id=5]
+[ext_resource path="res://art/enemyWalking_1.png" type="Texture" id=2]
+[ext_resource path="res://art/enemyWalking_2.png" type="Texture" id=3]
+[ext_resource path="res://art/enemySwimming_1.png" type="Texture" id=4]
+[ext_resource path="res://art/enemySwimming_2.png" type="Texture" id=5]
 [ext_resource path="res://art/enemyFlyingAlt_1.png" type="Texture" id=6]
 [ext_resource path="res://art/enemyFlyingAlt_2.png" type="Texture" id=7]
+[ext_resource path="res://art/playerGrey_up1.png" type="Texture" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
-"name": "swim",
-"speed": 5.0
+"name": "walk",
+"speed": 4.0
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
-"name": "walk",
-"speed": 4.0
+"name": "swim",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
@@ -54,10 +55,6 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Applied Forces", "Collision" ]
-__meta__ = {
-"_edit_group_": true
-}
 MIN_SPEED = 150
 MAX_SPEED = 250
 
@@ -66,7 +63,6 @@ MAX_SPEED = 250
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 1 )
 animation = "fly"
-frame = 1
 playing = true
 _sections_unfolded = [ "Transform" ]
 
@@ -80,6 +76,24 @@ _sections_unfolded = [ "Transform" ]
 
 rect = Rect2( -10, -10, 20, 20 )
 
+[node name="TouchScreenButton" type="TouchScreenButton" parent="." index="3"]
+
+self_modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -20.392, -29.3645 )
+scale = Vector2( 0.445311, 0.445311 )
+normal = ExtResource( 8 )
+pressed = null
+bitmask = null
+shape = null
+shape_centered = true
+shape_visible = true
+passby_press = false
+action = ""
+visibility_mode = 0
+_sections_unfolded = [ "Z Index" ]
+
 [connection signal="screen_exited" from="Visibility" to="." method="_on_Visibility_screen_exited"]
+
+[connection signal="pressed" from="TouchScreenButton" to="." method="_on_TouchScreenButton_pressed"]
 
 
