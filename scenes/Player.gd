@@ -8,7 +8,7 @@ var screensize
 
 func _ready():
 	screensize = get_viewport_rect().size
-	#hide()
+	hide()
 
 func _process(delta):
 	velocity = Vector2()
