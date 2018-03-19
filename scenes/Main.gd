@@ -5,6 +5,7 @@ export (PackedScene) var Bullet
 
 var score
 var touch_position = Vector2()
+var drag_player = false
 
 # var to bullet and shoot
 var drag_speed = 40
@@ -17,34 +18,38 @@ func _ready():
 	
 func _physics_process(delta):
 	if touch_position.x > 0:
-		kill_mob()
+		var space_state = get_world_2d().direct_space_state
+		var result = space_state.intersect_point(touch_position, 1, [], 1)
+		print(result.size())
+		if result.size() > 0:
+			var f = result.front()
+			if f.collider.name.find("Mob") >= 0:
+				f.collider.kill()
+			elif f.collider.name == "Player":
+				drag_player = true
+				
+		touch_position = Vector2()
 			
 func _input(event):
 	if event is InputEventScreenTouch:
 		if event.pressed:
 			touch_position = event.position
 		else:
+			drag_player = false
 			if start_line_position != Vector2() and end_line_position != Vector2() and start_line_position != end_line_position:
 				shoot()
 			else:
 				start_line_position = Vector2()
 				end_line_position = Vector2()
 	elif event is InputEventScreenDrag:
-		if event.relative.x > drag_speed or event.relative.x < -1*drag_speed or event.relative.y > drag_speed or event.relative.y < -1*drag_speed:
+		if drag_player:
+			$Player.position = event.position
+		elif event.relative.x > drag_speed or event.relative.x < -1*drag_speed or event.relative.y > drag_speed or event.relative.y < -1*drag_speed:
 			if start_line_position == Vector2():
 				start_line_position = event.position 
 				end_line_position = event.position
 			else:
 				end_line_position = event.position
-
-func kill_mob():
-		var space_state = get_world_2d().direct_space_state
-		var result = space_state.intersect_point(touch_position, 1, [], 2)
-		if result.size() > 0:
-			var f = result.front()
-			if f.collider.name.find("Mob") >= 0:
-				f.collider.kill()
-		touch_position = Vector2()
 
 func shoot():
 	var bullet = Bullet.instance()
