@@ -7,7 +7,7 @@ var score
 var touch_position = Vector2()
 
 # var to bullet and shoot
-var drag_speed = 50
+var drag_speed = 40
 var start_line_position = Vector2()
 var end_line_position = Vector2()
 
