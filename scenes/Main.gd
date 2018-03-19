@@ -1,38 +1,59 @@
 extends Node
 
 export (PackedScene) var Mob
+export (PackedScene) var Bullet
+
 var score
 var touch_position = Vector2()
+
+# var to bullet and shoot
+var drag_speed = 50
+var start_line_position = Vector2()
+var end_line_position = Vector2()
 
 
 func _ready():
 	randomize()
 	
 func _physics_process(delta):
-#	var space_state = get_world_2d().direct_space_state
-#	var result = space_state.intersect_ray(Vector2(150, 150), Vector2(600, 150))
-#	if result:
-#		print("Hit at collider: ", result.collider)
-#		print("Hit at collider_id: ", result.collider_id)
-#		print("Hit at rid: ", result.rid)
-#		print("Hit at point: ", result.position)
-#		print("name: ", result.collider.name)
-#		print("---")
-#		if result.collider.name.find("Mob") == 1:
-#			result.collider.queue_free()
 	if touch_position.x > 0:
+		kill_mob()
+			
+func _input(event):
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			touch_position = event.position
+		else:
+			if start_line_position != Vector2() and end_line_position != Vector2() and start_line_position != end_line_position:
+				shoot()
+			else:
+				start_line_position = Vector2()
+				end_line_position = Vector2()
+	elif event is InputEventScreenDrag:
+		if event.relative.x > drag_speed or event.relative.x < -1*drag_speed or event.relative.y > drag_speed or event.relative.y < -1*drag_speed:
+			if start_line_position == Vector2():
+				start_line_position = event.position 
+				end_line_position = event.position
+			else:
+				end_line_position = event.position
+
+func kill_mob():
 		var space_state = get_world_2d().direct_space_state
 		var result = space_state.intersect_point(touch_position, 1, [], 2)
 		if result.size() > 0:
 			var f = result.front()
-			print("pow!")
-			f.collider.queue_free()
-		#touch_position = Vector2()
-			
-func _input(event):
-	if event is InputEventScreenTouch and event.pressed:
-		touch_position = event.position
+			if f.collider.name.find("Mob") >= 0:
+				f.collider.kill()
+		touch_position = Vector2()
 
+func shoot():
+	var bullet = Bullet.instance()
+	var dir = (end_line_position - start_line_position).normalized()
+	bullet.start_at(dir, end_line_position)
+	add_child(bullet)
+	start_line_position = Vector2()
+	end_line_position = Vector2()
+	
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()

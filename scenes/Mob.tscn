@@ -63,6 +63,7 @@ MAX_SPEED = 250
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 1 )
 animation = "fly"
+frame = 1
 playing = true
 _sections_unfolded = [ "Transform" ]
 
