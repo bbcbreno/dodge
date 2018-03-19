@@ -23,11 +23,11 @@ func _physics_process(delta):
 	if touch_position.x > 0:
 		var space_state = get_world_2d().direct_space_state
 		var result = space_state.intersect_point(touch_position, 1, [], 2)
-		var f = result.front()
-		if f != null:
+		if result.size() > 0:
+			var f = result.front()
 			print("pow!")
 			f.collider.queue_free()
-		touch_position = Vector2()
+		#touch_position = Vector2()
 			
 func _input(event):
 	if event is InputEventScreenTouch and event.pressed:
