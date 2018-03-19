@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/Main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Mob.tscn" type="PackedScene" id=2]
@@ -14,6 +14,12 @@ bake_interval = 5.0
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -0.0409031, 0, 0, 0, 0, 0, 720, 0 )
 }
+
+[sub_resource type="SegmentShape2D" id=2]
+
+custom_solver_bias = 0.0
+a = Vector2( 1080, -10 )
+b = Vector2( -1070, -10 )
 
 [node name="Main" type="CanvasLayer" index="0"]
 
@@ -116,6 +122,25 @@ wait_time = 20.0
 one_shot = false
 autostart = true
 
+[node name="OufOfArea" type="Area2D" parent="." index="11"]
+
+position = Vector2( 360, 1480 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OufOfArea" index="0"]
+
+shape = SubResource( 2 )
+
 [connection signal="hit" from="Player" to="." method="game_over"]
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
@@ -125,5 +150,7 @@ autostart = true
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
 
 [connection signal="start_game" from="HUD" to="." method="new_game"]
+
+[connection signal="body_entered" from="OufOfArea" to="." method="_on_OufOfArea_body_entered"]
 
 

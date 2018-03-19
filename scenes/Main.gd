@@ -86,6 +86,11 @@ func _on_MobTimer_timeout():
 	add_child(mob)
 	var direction = $MobPath/MobSpawnLocation.rotation + PI/2
 	mob.position = $MobPath/MobSpawnLocation.position
-	direction += rand_range(-PI/4, PI/4)
+	direction += rand_range(-PI/60, PI/60)
 	mob.rotation = direction
 	mob.set_linear_velocity(Vector2(rand_range(mob.MIN_SPEED, mob.MAX_SPEED), 0).rotated(direction))
+
+
+func _on_OufOfArea_body_entered(body):
+	print("kill")
+	body.queue_free()
