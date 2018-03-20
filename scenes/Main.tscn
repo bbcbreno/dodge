@@ -22,7 +22,7 @@ custom_solver_bias = 0.0
 a = Vector2( 1080, -10 )
 b = Vector2( -1070, -10 )
 
-[node name="Main" type="CanvasLayer" index="0"]
+[node name="Main" type="CanvasLayer"]
 
 layer = 1
 offset = Vector2( 0, 0 )

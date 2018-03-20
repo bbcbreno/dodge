@@ -22,7 +22,7 @@ width = 2048
 min_value = 0.0
 max_value = 1.0
 bake_resolution = 100
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0.00622638, 0.91748 ), 0.0, 0.0, 0, 0, Vector2( 0.998935, 0.388672 ), 0.227162, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=4]
 
@@ -41,7 +41,7 @@ flag_rotate_y = false
 flag_disable_z = true
 spread = 45.0
 flatness = 0.0
-gravity = Vector3( 0, 100, 0 )
+gravity = Vector3( 0, 0, 0 )
 initial_velocity = 1.0
 initial_velocity_random = 0.0
 angular_velocity = 0.0
@@ -58,7 +58,7 @@ damping = 0.0
 damping_random = 0.0
 angle = 0.0
 angle_random = 0.0
-scale = 0.2
+scale = 0.5
 scale_random = 0.0
 scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
@@ -69,7 +69,7 @@ anim_speed_random = 0.0
 anim_offset = 0.0
 anim_offset_random = 0.0
 anim_loop = false
-_sections_unfolded = [ "Color", "Gravity", "Scale" ]
+_sections_unfolded = [ "Animation", "Color", "Emission Shape", "Gravity", "Orbit Velocity", "Scale", "Spread", "Trail" ]
 
 [sub_resource type="SpriteFrames" id=6]
 
@@ -91,7 +91,7 @@ custom_solver_bias = 0.0
 radius = 27.1058
 height = 13.5673
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="Area2D" index="0"]
 
 position = Vector2( -0.0481567, 0 )
 input_pickable = true
@@ -111,8 +111,8 @@ SPEED = 400
 [node name="Trail" type="Particles2D" parent="." index="0"]
 
 emitting = true
-amount = 12
-lifetime = 2.0
+amount = 8
+lifetime = 1.0
 one_shot = false
 preprocess = 0.0
 speed_scale = 2.0
@@ -128,7 +128,7 @@ texture = ExtResource( 2 )
 normal_map = null
 h_frames = 1
 v_frames = 1
-_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time" ]
+_sections_unfolded = [ "Drawing", "Material", "Process Material", "Textures", "Time", "Transform", "Visibility" ]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
 
@@ -136,7 +136,7 @@ scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 6 )
 animation = "right"
 frame = 1
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 
