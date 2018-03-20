@@ -2,6 +2,7 @@ extends Node
 
 export (PackedScene) var Mob
 export (PackedScene) var Bullet
+export (PackedScene) var MobDead
 
 var score
 var touch_position = Vector2()
@@ -89,12 +90,18 @@ func _on_MobTimer_timeout():
 	$MobPath/MobSpawnLocation.set_offset(randi())
 	var mob = Mob.instance()
 	add_child(mob)
+	mob.connect("boom", self, "explode")
 	var direction = $MobPath/MobSpawnLocation.rotation + PI/2
 	mob.position = $MobPath/MobSpawnLocation.position
 	direction += rand_range(-PI/60, PI/60)
 	mob.rotation = direction
 	mob.set_linear_velocity(Vector2(rand_range(mob.MIN_SPEED, mob.MAX_SPEED), 0).rotated(direction))
 
+func explode(_position):
+	var mob_dead = MobDead.instance()
+	mob_dead.position = _position + Vector2(0, 10)
+	add_child(mob_dead)
+	
 
 func _on_OufOfArea_body_entered(body):
 	print("kill")
