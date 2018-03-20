@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/Player.gd" type="Script" id=1]
 [ext_resource path="res://art/playerGrey_up1.png" type="Texture" id=2]
@@ -91,6 +91,12 @@ custom_solver_bias = 0.0
 radius = 27.1058
 height = 13.5673
 
+[sub_resource type="CapsuleShape2D" id=8]
+
+custom_solver_bias = 0.0
+radius = 44.799
+height = 20.0
+
 [node name="Player" type="Area2D" index="0"]
 
 position = Vector2( -0.0481567, 0 )
@@ -142,6 +148,12 @@ _sections_unfolded = [ "Transform", "Visibility" ]
 
 shape = SubResource( 7 )
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+
+[node name="ExpandArea" type="CollisionShape2D" parent="." index="3"]
+
+shape = SubResource( 8 )
+disabled = true
+_sections_unfolded = [ "Visibility" ]
 
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
 

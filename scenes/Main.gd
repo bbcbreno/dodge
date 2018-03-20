@@ -3,6 +3,7 @@ extends Node
 export (PackedScene) var Mob
 export (PackedScene) var Bullet
 export (PackedScene) var MobDead
+export (PackedScene) var Points
 
 var score
 var touch_position = Vector2()
@@ -101,6 +102,11 @@ func explode(_position):
 	var mob_dead = MobDead.instance()
 	mob_dead.position = _position + Vector2(0, 10)
 	add_child(mob_dead)
+	
+	var score_label = Points.instance()
+	score_label.position = _position
+	score_label.set_text("50 points!")
+	add_child(score_label)
 	
 
 func _on_OufOfArea_body_entered(body):

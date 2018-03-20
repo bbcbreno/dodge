@@ -15,7 +15,6 @@ func _ready():
 
 
 func kill():
-	print("morri!")
 	emit_signal("boom", position)
 	queue_free()
 

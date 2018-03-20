@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/Main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Mob.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Bullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/MobDead.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=6]
-[ext_resource path="res://art/House In a Forest Loop.ogg" type="AudioStream" id=7]
-[ext_resource path="res://art/gameover.wav" type="AudioStream" id=8]
+[ext_resource path="res://scenes/Points.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=7]
+[ext_resource path="res://art/House In a Forest Loop.ogg" type="AudioStream" id=8]
+[ext_resource path="res://art/gameover.wav" type="AudioStream" id=9]
 
 [sub_resource type="Curve2D" id=1]
 
@@ -33,6 +34,7 @@ script = ExtResource( 1 )
 Mob = ExtResource( 2 )
 Bullet = ExtResource( 3 )
 MobDead = ExtResource( 4 )
+Points = ExtResource( 5 )
 
 [node name="Background" type="ColorRect" parent="." index="0"]
 
@@ -50,7 +52,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.492188, 0.310925, 0.310925, 1 )
 
-[node name="Player" parent="." index="1" instance=ExtResource( 5 )]
+[node name="Player" parent="." index="1" instance=ExtResource( 6 )]
 
 [node name="MobTimer" type="Timer" parent="." index="2"]
 
@@ -99,11 +101,11 @@ cubic_interp = true
 loop = true
 lookahead = 4.0
 
-[node name="HUD" parent="." index="7" instance=ExtResource( 6 )]
+[node name="HUD" parent="." index="7" instance=ExtResource( 7 )]
 
 [node name="Music" type="AudioStreamPlayer" parent="." index="8"]
 
-stream = ExtResource( 7 )
+stream = ExtResource( 8 )
 volume_db = 0.0
 autoplay = false
 mix_target = 0
@@ -111,7 +113,7 @@ bus = "Master"
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="." index="9"]
 
-stream = ExtResource( 8 )
+stream = ExtResource( 9 )
 volume_db = 0.0
 autoplay = false
 mix_target = 0
@@ -142,6 +144,22 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OufOfArea" index="0"]
 
 shape = SubResource( 2 )
+
+[node name="Mob" parent="." index="12" instance=ExtResource( 2 )]
+
+position = Vector2( 460, 620 )
+
+[node name="Mob2" parent="." index="13" instance=ExtResource( 2 )]
+
+position = Vector2( 460, 620 )
+
+[node name="Mob3" parent="." index="14" instance=ExtResource( 2 )]
+
+position = Vector2( 460, 620 )
+
+[node name="Mob4" parent="." index="15" instance=ExtResource( 2 )]
+
+position = Vector2( 460, 620 )
 
 [connection signal="hit" from="Player" to="." method="game_over"]
 
