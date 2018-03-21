@@ -10,8 +10,8 @@ signal boom
 func _ready():
 	$AnimatedSprite.animation = mob_types[randi() % mob_types.size()]
 	
-#func _process(delta):
-#	print($Visibility.is_on_screen())
+#func _physics_process(delta):
+#	move_and_collide(Vector2(0, rand_range(MIN_SPEED, MAX_SPEED)*delta)) # Move down 1 pixel per physics frame
 
 
 func kill():

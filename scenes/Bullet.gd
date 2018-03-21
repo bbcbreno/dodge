@@ -17,8 +17,10 @@ func _physics_process(delta):
 
 
 func _on_Bullet_body_entered(body):
-	body
-	if body.name.find("Mob") >= 0 and not kill_mob:
+	if body.name.find("BigMob") >= 0 and not kill_mob:
+		kill_mob = true
+		body.kill(position)
+	elif body.name.find("Mob") >= 0 and not kill_mob:
 		kill_mob = true
 		body.kill()
 	queue_free()

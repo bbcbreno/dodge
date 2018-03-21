@@ -25,7 +25,9 @@ func _physics_process(delta):
 		print(result.size())
 		if result.size() > 0:
 			var f = result.front()
-			if f.collider.name.find("Mob") >= 0:
+			if f.collider.name.find("BigMob") >= 0:
+				f.collider.kill(touch_position)
+			elif f.collider.name.find("Mob") >= 0:
 				f.collider.kill()
 			elif f.collider.name == "Player":
 				drag_player = true
