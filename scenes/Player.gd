@@ -12,10 +12,10 @@ func _ready():
 
 func _process(delta):
 	$Light2D.energy = $Light2D.energy + rand_range(-0.1, 0.1)
-	if $Light2D.energy < 0.2:
-		$Light2D.energy = 0.2
-	elif $Light2D.energy  > 0.5:
-		$Light2D.energy  = 0.5
+	if $Light2D.energy < 0.3:
+		$Light2D.energy = 0.3
+	elif $Light2D.energy  > 0.6:
+		$Light2D.energy  = 0.6
 	
 	velocity = Vector2()
 	if Input.is_action_pressed("ui_right"):

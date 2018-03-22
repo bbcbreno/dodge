@@ -18,9 +18,11 @@ func _ready():
 func kill(touch_position):
 	live -= 1
 	if live == 0:
+		gravity_scale = 0
+		yield(get_tree().create_timer(2.0), "timeout")
 		emit_signal("boom", position)
 		queue_free()
-	apply_impulse(touch_position, (position - touch_position)/8 + Vector2(0, -100))
+	apply_impulse(touch_position, (position - touch_position)/8 + Vector2(0, -300))
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

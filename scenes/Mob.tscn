@@ -1,12 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/Mob.gd" type="Script" id=1]
-[ext_resource path="res://art/enemyFlyingAlt_1.png" type="Texture" id=2]
-[ext_resource path="res://art/enemyFlyingAlt_2.png" type="Texture" id=3]
-[ext_resource path="res://art/enemySwimming_1.png" type="Texture" id=4]
-[ext_resource path="res://art/enemySwimming_2.png" type="Texture" id=5]
-[ext_resource path="res://art/enemyWalking_1.png" type="Texture" id=6]
-[ext_resource path="res://art/enemyWalking_2.png" type="Texture" id=7]
+[ext_resource path="res://art/triangle_mob_02.png" type="Texture" id=2]
+[ext_resource path="res://art/triangle_mob_03.png" type="Texture" id=3]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -14,31 +10,30 @@ animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "fly",
-"speed": 3.0
+"speed": 1.0
 }, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "swim",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "walk",
-"speed": 4.0
+"speed": 1.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="ConvexPolygonShape2D" id=4]
 
 custom_solver_bias = 0.0
-radius = 34.6794
-height = 14.7974
+points = PoolVector2Array( 0, -40, 40, 40, -40, 40 )
 
 [sub_resource type="OccluderPolygon2D" id=3]
 
 closed = true
 cull_mode = 0
-polygon = PoolVector2Array( 30.2516, -25.9912, 41.7325, 1.65993, 27.5027, 28.5026, -21.4932, 31.7366, -19.5528, -29.387, 10.6856, -32.9444 )
+polygon = PoolVector2Array( 40, 0, -40, -40, -40, 40 )
 _sections_unfolded = [ "Resource" ]
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = PoolVector2Array( 90, 0, -70, -80, -70, 80 )
 
 [node name="Mob" type="RigidBody2D"]
 
@@ -62,22 +57,21 @@ angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision" ]
-MIN_SPEED = 150
-MAX_SPEED = 250
+MIN_SPEED = 350
+MAX_SPEED = 450
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
 
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 1 )
 animation = "fly"
-frame = 1
 playing = true
 _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
 rotation = 1.5708
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Visibility" type="VisibilityNotifier2D" parent="." index="2"]
@@ -91,6 +85,11 @@ show_behind_parent = true
 occluder = SubResource( 3 )
 light_mask = 1
 _sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="ExpandArea" type="CollisionShape2D" parent="." index="4"]
+
+shape = SubResource( 5 )
+disabled = true
 
 [connection signal="screen_exited" from="Visibility" to="." method="_on_Visibility_screen_exited"]
 

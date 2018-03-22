@@ -2,7 +2,7 @@ extends RigidBody2D
 
 export (int) var MIN_SPEED
 export (int) var MAX_SPEED
-var mob_types = ["walk", "swim", "fly"]
+var mob_types = ["swim", "fly"]
 
 signal boom
 

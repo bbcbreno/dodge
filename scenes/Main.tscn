@@ -47,21 +47,25 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 0.492188, 0.310925, 0.310925, 1 )
+color = Color( 0.0429267, 0.109375, 0.109375, 1 )
 
 [node name="Player" parent="." index="1" instance=ExtResource( 7 )]
 
 [node name="BigMobTimer" type="Timer" parent="." index="2"]
 
 process_mode = 1
-wait_time = 5.0
+wait_time = 30.0
 one_shot = false
 autostart = false
+
+[node name="BigMob" parent="BigMobTimer" index="0" instance=ExtResource( 3 )]
+
+position = Vector2( 350, 130 )
 
 [node name="MobTimer" type="Timer" parent="." index="3"]
 
 process_mode = 1
-wait_time = 0.1
+wait_time = 0.2
 one_shot = false
 autostart = false
 
@@ -95,7 +99,7 @@ _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" index="0"]
 
-position = Vector2( -0.0409031, 0 )
+position = Vector2( 0, -130 )
 offset = 0.0
 h_offset = 0.0
 v_offset = 0.0

@@ -79,8 +79,8 @@ height = 13.5673
 [sub_resource type="CapsuleShape2D" id=7]
 
 custom_solver_bias = 0.0
-radius = 44.799
-height = 20.0
+radius = 49.9584
+height = 7.74533
 
 [node name="Player" type="Area2D"]
 
