@@ -6,14 +6,14 @@
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 226.763
+radius = 112.307
 
 [sub_resource type="CircleShape2D" id=2]
 
 custom_solver_bias = 0.0
-radius = 227.859
+radius = 115.759
 
-[node name="BigMob" type="RigidBody2D"]
+[node name="BigMob" type="RigidBody2D" index="0"]
 
 input_pickable = true
 collision_layer = 1
@@ -34,17 +34,19 @@ linear_damp = 2.0
 angular_velocity = 0.0
 angular_damp = 1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Applied Forces", "Collision", "Linear", "Pickable" ]
+_sections_unfolded = [ "Applied Forces", "Collision", "Linear", "Pickable", "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
 shape = SubResource( 1 )
 
-[node name="Area2D" type="Area2D" parent="." index="2"]
+[node name="BigMobArea" type="Area2D" parent="." index="2"]
 
 input_pickable = false
 gravity_vec = Vector2( 0, 1 )
@@ -53,14 +55,14 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-_sections_unfolded = [ "Collision", "Pickable" ]
+_sections_unfolded = [ "Collision", "Pickable", "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BigMobArea" index="0"]
 
 shape = SubResource( 2 )
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="BigMobArea" to="." method="_on_Area2D_area_entered"]
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="BigMobArea" to="." method="_on_Area2D_body_entered"]
 
 

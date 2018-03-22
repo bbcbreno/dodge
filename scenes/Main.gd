@@ -11,7 +11,7 @@ var touch_position = Vector2()
 var drag_player = false
 
 # var to bullet and shoot
-var drag_speed = 40
+var drag_speed = 30
 var start_line_position = Vector2()
 var end_line_position = Vector2()
 
@@ -23,10 +23,12 @@ func _physics_process(delta):
 	if touch_position.x > 0:
 		var space_state = get_world_2d().direct_space_state
 		var result = space_state.intersect_point(touch_position, 1, [], 1)
-		print(result.size())
 		if result.size() > 0:
 			var f = result.front()
-			if f.collider.name.find("BigMob") >= 0:
+			print (f.collider.name)
+			if f.collider.name.find("BigMobArea") >= 0:
+				f.collider.get_parent().kill(touch_position)
+			elif f.collider.name.find("BigMob") >= 0:
 				f.collider.kill(touch_position)
 			elif f.collider.name.find("Mob") >= 0:
 				f.collider.kill()
@@ -125,6 +127,5 @@ func explode(_position):
 	
 
 func _on_OufOfArea_body_entered(body):
-	#print("kill")
 	#body.queue_free()
 	pass

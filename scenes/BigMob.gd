@@ -30,6 +30,5 @@ func kill(touch_position):
 func _on_Area2D_body_entered(body):
 	print (body.name)
 	if body.name.find("Mob") >= 0 and body.name.find("BigMob") < 0:
-		print("morra!")
 		#body.queue_free()
 		body.kill()
