@@ -72,7 +72,7 @@ autostart = false
 [node name="ScoreTimer" type="Timer" parent="." index="4"]
 
 process_mode = 1
-wait_time = 1.0
+wait_time = 0.1
 one_shot = false
 autostart = false
 

@@ -9,6 +9,7 @@ export (PackedScene) var Points
 var score
 var touch_position = Vector2()
 var drag_player = false
+var points = 0
 
 # var to bullet and shoot
 var drag_speed = 30
@@ -77,6 +78,7 @@ func game_over():
 	
 func new_game():
 	score = 0
+	points = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	$HUD.update_score(score)
@@ -91,7 +93,7 @@ func _on_StartTimer_timeout():
 
 
 func _on_ScoreTimer_timeout():
-	score += 1
+	score += 0.1
 	$HUD.update_score(score)
 
 func _on_BigMobTimer_timeout():
@@ -120,6 +122,8 @@ func _on_MobTimer_timeout():
 func explode(_position):
 	var mob_dead = MobDead.instance()
 	mob_dead.position = _position + Vector2(0, 10)
+	points += 50
+	$HUD.update_points(points)
 	add_child(mob_dead)
 	
 	var score_label = Points.instance()

@@ -1,35 +1,39 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/HUD.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=1]
 
-size = 64
+size = 45
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFontData" id=2]
 
-size = 64
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 2 )
-_sections_unfolded = [ "Font", "Settings" ]
+font_path = "res://fonts/Xolonium-Regular.ttf"
 
 [sub_resource type="DynamicFont" id=3]
 
-size = 64
+size = 45
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 2 )
+font_data = SubResource( 2 )
 _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=4]
 
-size = 0
+size = 64
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=5]
+
+size = 64
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
@@ -50,9 +54,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 0.0
-margin_left = 320.0
-margin_right = -80.0
-margin_bottom = 100.0
+margin_left = 500.0
+margin_bottom = 55.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -60,14 +63,35 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 1 )
-text = "30"
+text = "30:00"
 align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "Margin", "custom_fonts", "custom_styles" ]
 
-[node name="MessageLabel" type="Label" parent="." index="1"]
+[node name="PointsLabel" type="Label" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 450.0
+margin_bottom = 55.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 3 )
+text = "0000000010"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts", "custom_styles" ]
+
+[node name="MessageLabel" type="Label" parent="." index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -83,7 +107,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "Dodge the Creeps!"
 align = 1
 valign = 1
@@ -93,7 +117,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "custom_fonts" ]
 
-[node name="StartButton" type="Button" parent="." index="2"]
+[node name="StartButton" type="Button" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -110,7 +134,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -120,33 +144,12 @@ flat = false
 align = 1
 _sections_unfolded = [ "Anchor", "Margin", "custom_fonts" ]
 
-[node name="MessageTimer" type="Timer" parent="." index="3"]
+[node name="MessageTimer" type="Timer" parent="." index="4"]
 
 process_mode = 1
 wait_time = 2.0
 one_shot = true
 autostart = false
-
-[node name="Points" type="Label" parent="." index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = SubResource( 4 )
-text = "0000"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
 
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 

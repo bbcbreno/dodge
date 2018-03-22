@@ -3,31 +3,31 @@
 [ext_resource path="res://art/mob_dead.png" type="Texture" id=1]
 [ext_resource path="res://scenes/MobDead.gd" type="Script" id=2]
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=1]
 
-offsets = PoolRealArray( 0, 0.714653, 1 )
-colors = PoolColorArray( 0.339844, 0.183197, 0, 1, 0.339643, 0.181561, 0.000247913, 1, 0.320312, 0.0241095, 0.0241095, 1 )
+offsets = PoolRealArray( 0, 0.457584, 1 )
+colors = PoolColorArray( 0.88312, 0.338395, 0.960938, 1, 0.886287, 0.930551, 0.494721, 1, 0.062521, 0.680029, 0.894531, 1 )
 
-[sub_resource type="GradientTexture" id=5]
+[sub_resource type="GradientTexture" id=2]
 
 flags = 4
-gradient = SubResource( 4 )
+gradient = SubResource( 1 )
 width = 2048
 
-[sub_resource type="Curve" id=1]
+[sub_resource type="Curve" id=3]
 
 min_value = 0.0
 max_value = 1.0
 bake_resolution = 100
 _data = [ Vector2( 0.00278545, 0.0871582 ), 0.0, 0.0, 0, 0, Vector2( 0.996785, 0.718018 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=2]
+[sub_resource type="CurveTexture" id=4]
 
 flags = 4
 width = 2048
-curve = SubResource( 1 )
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=5]
 
 render_priority = 0
 trail_divisor = 1
@@ -56,8 +56,8 @@ angle = 0.0
 angle_random = 0.0
 scale = 1.0
 scale_random = 1.0
-scale_curve = SubResource( 2 )
-color_ramp = SubResource( 5 )
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
 hue_variation = 0.0
 hue_variation_random = 0.0
 anim_speed = 0.0
@@ -82,12 +82,12 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = true
 draw_order = 0
-process_material = SubResource( 3 )
+process_material = SubResource( 5 )
 texture = ExtResource( 1 )
 normal_map = null
 h_frames = 1
 v_frames = 1
 script = ExtResource( 2 )
-_sections_unfolded = [ "Process Material", "Textures", "Time" ]
+_sections_unfolded = [ "Material", "Process Material", "Textures", "Time", "Transform", "Visibility", "Z Index" ]
 
 
