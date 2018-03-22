@@ -17,6 +17,8 @@ var end_line_position = Vector2()
 
 
 func _ready():
+	$StartPosition.position.x = get_viewport_rect().size.x/2
+	$StartPosition.position.y = get_viewport_rect().size.y/5 * 4
 	randomize()
 	
 func _physics_process(delta):

@@ -13,7 +13,7 @@ radius = 112.307
 custom_solver_bias = 0.0
 radius = 115.759
 
-[node name="BigMob" type="RigidBody2D" index="0"]
+[node name="BigMob" type="RigidBody2D"]
 
 input_pickable = true
 collision_layer = 1

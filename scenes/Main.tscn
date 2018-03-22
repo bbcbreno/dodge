@@ -15,7 +15,7 @@
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -0.0409031, 0, 0, 0, 0, 0, 720, 0 )
+"points": PoolVector2Array( 0, 0, 0, 0, 0, -130, 0, 0, 0, 0, 720.041, -130 )
 }
 
 [sub_resource type="SegmentShape2D" id=2]
@@ -24,7 +24,7 @@ custom_solver_bias = 0.0
 a = Vector2( 1080, -10 )
 b = Vector2( -1070, -10 )
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 Mob = ExtResource( 2 )
@@ -54,14 +54,14 @@ color = Color( 0.492188, 0.310925, 0.310925, 1 )
 [node name="BigMobTimer" type="Timer" parent="." index="2"]
 
 process_mode = 1
-wait_time = 30.0
+wait_time = 5.0
 one_shot = false
 autostart = false
 
 [node name="MobTimer" type="Timer" parent="." index="3"]
 
 process_mode = 1
-wait_time = 1.0
+wait_time = 0.1
 one_shot = false
 autostart = false
 
@@ -89,7 +89,6 @@ __meta__ = {
 
 [node name="MobPath" type="Path2D" parent="." index="7"]
 
-position = Vector2( 0, -220 )
 scale = Vector2( 0.999943, 1 )
 curve = SubResource( 1 )
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
@@ -104,6 +103,7 @@ rotate = true
 cubic_interp = true
 loop = true
 lookahead = 4.0
+_sections_unfolded = [ "Transform" ]
 
 [node name="HUD" parent="." index="8" instance=ExtResource( 8 )]
 
@@ -148,26 +148,6 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OufOfArea" index="0"]
 
 shape = SubResource( 2 )
-
-[node name="Mob" parent="." index="13" instance=ExtResource( 2 )]
-
-position = Vector2( 460, 620 )
-
-[node name="Mob2" parent="." index="14" instance=ExtResource( 2 )]
-
-position = Vector2( 460, 620 )
-
-[node name="Mob3" parent="." index="15" instance=ExtResource( 2 )]
-
-position = Vector2( 460, 620 )
-
-[node name="Mob4" parent="." index="16" instance=ExtResource( 2 )]
-
-position = Vector2( 460, 620 )
-
-[node name="BigMob" parent="." index="17" instance=ExtResource( 3 )]
-
-position = Vector2( 390, 290 )
 
 [connection signal="hit" from="Player" to="." method="game_over"]
 
