@@ -2,14 +2,14 @@
 
 [ext_resource path="res://scenes/Main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Mob.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/Bullet.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/MobDead.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/Points.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=7]
-[ext_resource path="res://art/House In a Forest Loop.ogg" type="AudioStream" id=8]
-[ext_resource path="res://art/gameover.wav" type="AudioStream" id=9]
-[ext_resource path="res://scenes/BigMob.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/BigMob.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Bullet.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/MobDead.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Points.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=8]
+[ext_resource path="res://art/House In a Forest Loop.ogg" type="AudioStream" id=9]
+[ext_resource path="res://art/gameover.wav" type="AudioStream" id=10]
 
 [sub_resource type="Curve2D" id=1]
 
@@ -24,13 +24,14 @@ custom_solver_bias = 0.0
 a = Vector2( 1080, -10 )
 b = Vector2( -1070, -10 )
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 Mob = ExtResource( 2 )
-Bullet = ExtResource( 3 )
-MobDead = ExtResource( 4 )
-Points = ExtResource( 5 )
+BigMob = ExtResource( 3 )
+Bullet = ExtResource( 4 )
+MobDead = ExtResource( 5 )
+Points = ExtResource( 6 )
 
 [node name="Background" type="ColorRect" parent="." index="0"]
 
@@ -48,30 +49,37 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.492188, 0.310925, 0.310925, 1 )
 
-[node name="Player" parent="." index="1" instance=ExtResource( 6 )]
+[node name="Player" parent="." index="1" instance=ExtResource( 7 )]
 
-[node name="MobTimer" type="Timer" parent="." index="2"]
+[node name="BigMobTimer" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 20.0
+one_shot = false
+autostart = false
+
+[node name="MobTimer" type="Timer" parent="." index="3"]
 
 process_mode = 1
 wait_time = 0.2
 one_shot = false
 autostart = false
 
-[node name="ScoreTimer" type="Timer" parent="." index="3"]
+[node name="ScoreTimer" type="Timer" parent="." index="4"]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="StartTimer" type="Timer" parent="." index="4"]
+[node name="StartTimer" type="Timer" parent="." index="5"]
 
 process_mode = 1
 wait_time = 2.0
 one_shot = true
 autostart = false
 
-[node name="StartPosition" type="Position2D" parent="." index="5"]
+[node name="StartPosition" type="Position2D" parent="." index="6"]
 
 position = Vector2( 300, 950 )
 _sections_unfolded = [ "Transform" ]
@@ -79,9 +87,9 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="MobPath" type="Path2D" parent="." index="6"]
+[node name="MobPath" type="Path2D" parent="." index="7"]
 
-position = Vector2( 0.0409008, 0 )
+position = Vector2( 0, -220 )
 scale = Vector2( 0.999943, 1 )
 curve = SubResource( 1 )
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
@@ -97,17 +105,9 @@ cubic_interp = true
 loop = true
 lookahead = 4.0
 
-[node name="HUD" parent="." index="7" instance=ExtResource( 7 )]
+[node name="HUD" parent="." index="8" instance=ExtResource( 8 )]
 
-[node name="Music" type="AudioStreamPlayer" parent="." index="8"]
-
-stream = ExtResource( 8 )
-volume_db = 0.0
-autoplay = false
-mix_target = 0
-bus = "Master"
-
-[node name="DeathSound" type="AudioStreamPlayer" parent="." index="9"]
+[node name="Music" type="AudioStreamPlayer" parent="." index="9"]
 
 stream = ExtResource( 9 )
 volume_db = 0.0
@@ -115,14 +115,22 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 
-[node name="DifficultTimer" type="Timer" parent="." index="10"]
+[node name="DeathSound" type="AudioStreamPlayer" parent="." index="10"]
+
+stream = ExtResource( 10 )
+volume_db = 0.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="DifficultTimer" type="Timer" parent="." index="11"]
 
 process_mode = 1
 wait_time = 20.0
 one_shot = false
 autostart = true
 
-[node name="OufOfArea" type="Area2D" parent="." index="11"]
+[node name="OufOfArea" type="Area2D" parent="." index="12"]
 
 position = Vector2( 360, 1480 )
 input_pickable = true
@@ -141,27 +149,29 @@ __meta__ = {
 
 shape = SubResource( 2 )
 
-[node name="Mob" parent="." index="12" instance=ExtResource( 2 )]
+[node name="Mob" parent="." index="13" instance=ExtResource( 2 )]
 
 position = Vector2( 460, 620 )
 
-[node name="Mob2" parent="." index="13" instance=ExtResource( 2 )]
+[node name="Mob2" parent="." index="14" instance=ExtResource( 2 )]
 
 position = Vector2( 460, 620 )
 
-[node name="Mob3" parent="." index="14" instance=ExtResource( 2 )]
+[node name="Mob3" parent="." index="15" instance=ExtResource( 2 )]
 
 position = Vector2( 460, 620 )
 
-[node name="Mob4" parent="." index="15" instance=ExtResource( 2 )]
+[node name="Mob4" parent="." index="16" instance=ExtResource( 2 )]
 
 position = Vector2( 460, 620 )
 
-[node name="BigMob" parent="." index="16" instance=ExtResource( 10 )]
+[node name="BigMob" parent="." index="17" instance=ExtResource( 3 )]
 
-position = Vector2( 400, 0 )
+position = Vector2( 390, 290 )
 
 [connection signal="hit" from="Player" to="." method="game_over"]
+
+[connection signal="timeout" from="BigMobTimer" to="." method="_on_BigMobTimer_timeout"]
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 

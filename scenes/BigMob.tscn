@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/BigMob.gd" type="Script" id=1]
 [ext_resource path="res://art/bigMob.png" type="Texture" id=2]
@@ -8,11 +8,16 @@
 custom_solver_bias = 0.0
 radius = 226.763
 
+[sub_resource type="CircleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 227.859
+
 [node name="BigMob" type="RigidBody2D"]
 
-input_pickable = false
+input_pickable = true
 collision_layer = 1
-collision_mask = 1
+collision_mask = 4
 mode = 0
 mass = 1.0
 friction = 1.0
@@ -25,14 +30,11 @@ contact_monitor = false
 sleeping = false
 can_sleep = true
 linear_velocity = Vector2( 0, 0 )
-linear_damp = -1.0
+linear_damp = 2.0
 angular_velocity = 0.0
-angular_damp = -1.0
+angular_damp = 1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "Linear" ]
-__meta__ = {
-"_edit_group_": true
-}
+_sections_unfolded = [ "Applied Forces", "Collision", "Linear", "Pickable" ]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
@@ -42,6 +44,23 @@ texture = ExtResource( 2 )
 
 shape = SubResource( 1 )
 
-[connection signal="body_entered" from="." to="." method="_on_BigMob_body_entered"]
+[node name="Area2D" type="Area2D" parent="." index="2"]
+
+input_pickable = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision", "Pickable" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+
+shape = SubResource( 2 )
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 
 

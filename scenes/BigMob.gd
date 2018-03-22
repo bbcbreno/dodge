@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var live = 10
+var live = 4
 
 # class member variables go here, for example:
 # var a = 2
@@ -11,22 +11,25 @@ func _ready():
 	# Initialization here
 	pass
 	
-func _process(delta):
-	pass
+#func _process(delta):
+#
+#	pass
 	
 func kill(touch_position):
 	live -= 1
 	if live == 0:
 		emit_signal("boom", position)
 		queue_free()
-	apply_impulse(touch_position, (position - touch_position)/8 + Vector2(0, -80))
+	apply_impulse(touch_position, (position - touch_position)/8 + Vector2(0, -100))
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
 #	pass
 
-
-func _on_BigMob_body_entered(body):
-	print("n toque em mim")
-	pass # replace with function body
+func _on_Area2D_body_entered(body):
+	print (body.name)
+	if body.name.find("Mob") >= 0 and body.name.find("BigMob") < 0:
+		print("morra!")
+		#body.queue_free()
+		body.kill()

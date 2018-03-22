@@ -1,6 +1,7 @@
 extends Node
 
 export (PackedScene) var Mob
+export (PackedScene) var BigMob
 export (PackedScene) var Bullet
 export (PackedScene) var MobDead
 export (PackedScene) var Points
@@ -81,6 +82,7 @@ func new_game():
 
 func _on_StartTimer_timeout():
 	$MobTimer.start()
+	$BigMobTimer.start()
 	$ScoreTimer.start()
 
 
@@ -88,6 +90,17 @@ func _on_ScoreTimer_timeout():
 	score += 1
 	$HUD.update_score(score)
 
+func _on_BigMobTimer_timeout():
+	$MobPath/MobSpawnLocation.set_offset(randi())
+	var mob = BigMob.instance()
+	add_child(mob)
+	mob.connect("boom", self, "explode")
+	var direction = $MobPath/MobSpawnLocation.rotation + PI/2
+	mob.position = $MobPath/MobSpawnLocation.position
+	direction += rand_range(-PI/60, PI/60)
+	#mob.rotation = direction
+#	mob.set_linear_velocity(Vector2(rand_range(mob.MIN_SPEED, mob.MAX_SPEED), 0).rotated(direction))
+	
 
 func _on_MobTimer_timeout():
 	$MobPath/MobSpawnLocation.set_offset(randi())
@@ -112,5 +125,6 @@ func explode(_position):
 	
 
 func _on_OufOfArea_body_entered(body):
-	print("kill")
-	body.queue_free()
+	#print("kill")
+	#body.queue_free()
+	pass

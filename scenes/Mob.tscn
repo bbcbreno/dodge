@@ -40,7 +40,7 @@ cull_mode = 0
 polygon = PoolVector2Array( 30.2516, -25.9912, 41.7325, 1.65993, 27.5027, 28.5026, -21.4932, 31.7366, -19.5528, -29.387, 10.6856, -32.9444 )
 _sections_unfolded = [ "Resource" ]
 
-[node name="Mob" type="RigidBody2D" index="0"]
+[node name="Mob" type="RigidBody2D"]
 
 input_pickable = false
 collision_layer = 3
