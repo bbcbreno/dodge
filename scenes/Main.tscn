@@ -47,7 +47,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 0.0429267, 0.109375, 0.109375, 1 )
+color = Color( 0.0429267, 0.109375, 0.109375, 0.83498 )
 
 [node name="Player" parent="." index="1" instance=ExtResource( 7 )]
 
